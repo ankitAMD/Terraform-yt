@@ -7,4 +7,5 @@ output printname {
 #terraform plan --var "username=Ankit" -var "age=25"
 #terraform plan --var "age=24"
 #terraform plan
+#added type also like string numberc
 
