@@ -1,1 +1,6 @@
-variable username {}
+variable username {
+    default = "AAnkit"
+}
+variable age {
+
+}
