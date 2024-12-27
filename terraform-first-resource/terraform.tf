@@ -1,6 +1,6 @@
 provider "github" {
   # Configuration options
-  #
+  
 }
 
 resource "github_repository" "terraform-first-repo" {
