@@ -1,0 +1,179 @@
+Mental Model I have created - 
+
+GitHub Actions
+|
+Trigger / Manual Trigger (workflow_dispatch)
+|
+Choices of Stack and Environemtn 	User Selects: - Stack , - Environment
+|
+Set Permissions - id-token: write - contents: read
+|
+Setup Environemt varaibles  / Set Global Environment Variables (/ ke baad correct notation h)
+|
+Define Working Directory /  Configure Working Directory
+|
+Repository Checkout (Missed that steps)
+|
+Missing Runner Creation
+|
+Installation of Terraform
+|
+Authenticateion to Server    -  Authenticate GitHub Runner to Azure using OIDC   /  It's authenticating to:Azure Control Plane using: GitHub OIDC Token --> Managed Identity / Service Principal .--->Azure Subscription / Runner -> Azure Identity -> Azure Subscription
+|
+F ormat check of Terraform code
+|
+initializaiton
+|
+Vaidate
+|
+plan
+|
+apply
+|
+uplaon plan to Azure blocb staorage
+|
+Workflow Completed
+
+
+Better Mental Model (9.5/10 Version) - 
+
+GitHub Actions Workflow
+|
+Manual Trigger (workflow_dispatch)
+|
+User Selects:
+ - Stack
+ - Environment
+|
+Set Permissions
+ - id-token: write
+ - contents: read
+|
+Set Global Environment Variables
+ - TF_VERSION
+ - TF_WORKING_DIR
+ - Terraform Secrets
+|
+Create Ubuntu Runner
+|
+Set Default Working Directory
+|
+Checkout Repository
+|
+Install Terraform
+|
+Authenticate to Azure using OIDC
+|
+Terraform Format Check
+|
+Terraform Init
+|
+Terraform Validate
+|
+Terraform Plan
+|
+Terraform Apply
+|
+Upload tfplan to Azure Blob Storage
+|
+Workflow Completed
+
+
+Expert-Level Mental Model (What Seniors Think)
+
+Input Collection
+|
+Security Configuration
+|
+Runner Preparation
+|
+Source Code Retrieval
+|
+Tool Installation
+|
+Cloud Authentication
+|
+Terraform Quality Checks
+|
+Terraform Execution
+|
+Artifact Storage
+
+or 
+
+Collect Inputs
+↓
+Prepare Execution Environment
+↓
+Authenticate
+↓
+Validate Infrastructure Code
+↓
+Deploy Infrastructure
+↓
+Store Deployment Artifact
+
+
+
+
+
+
+This is the abstraction level you should gradually move toward.
+
+Biggest Improvement I Would Suggest 
+
+Currently you are thinking:
+
+What command runs next?
+
+
+Start thinking:
+
+Why is this stage needed?
+
+
+Example:
+
+checkout
+
+
+Don't think:
+
+Checkout command runs
+
+Think:
+
+Terraform code must exist on runner.
+
+terraform init
+
+
+Don't think:
+
+Init command runs
+
+Think:
+
+Providers and backend must be downloaded before Terraform can work.
+
+azure login
+
+
+Don't think:
+
+Login command runs
+
+Think:
+
+Runner needs Azure credentials before it can create resources.
+
+Final Grade
+Area	ScoreWorkflow flow understanding	9/10
+GitHub Actions concepts	8/10
+Terraform lifecycle understanding	8/10
+Azure authentication understanding	6.5/10
+Big-picture architecture thinking	7/10
+
+Final: 8/10
+
+For someone who is learning GitHub Actions + Terraform, this is a good mental model. The next step is to shift from "sequence of commands" to "purpose of each stage". That's what separates an engineer who can follow a workflow from one who can design and troubleshoot one. 🚀
